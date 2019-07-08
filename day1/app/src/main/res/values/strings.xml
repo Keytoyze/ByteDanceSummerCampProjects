@@ -1,0 +1,20 @@
+<!--
+  ~ Copyright (c) 2019 Chen Mouxiang <cmx_1007@foxmail.com>
+  ~ All Rights Reserved.
+  -->
+
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="submit">Submit</string>
+    <string name="enter_your_name">enter your name</string>
+    <string name="ios">iOS</string>
+    <string name="android">Android</string>
+    <string name="question_two">2. Which operating system do you prefer?</string>
+    <string name="question_one">1. What\'s the best program language in the world?</string>
+    <string name="c">C/C++</string>
+    <string name="java">Java</string>
+    <string name="python">Python</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="php">PHP</string>
+    <string name="hint">Please answer the following question:</string>
+</resources>

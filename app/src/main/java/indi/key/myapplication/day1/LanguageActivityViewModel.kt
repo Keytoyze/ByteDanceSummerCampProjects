@@ -3,9 +3,9 @@
  * All Rights Reserved.
  */
 
-package indi.key.myapplication
+package indi.key.myapplication.day1
 
-data class MainActivityViewModel(
+data class LanguageActivityViewModel(
     var isSubmitting: Boolean,
     var onButtonClickListener: () -> Unit,
     var onLanguageClick: (Int) -> Unit,

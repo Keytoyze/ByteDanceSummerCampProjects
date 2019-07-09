@@ -3,25 +3,26 @@
  * All Rights Reserved.
  */
 
-package indi.key.myapplication
+package indi.key.myapplication.day1
 
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import indi.key.myapplication.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
+import indi.key.myapplication.R
+import indi.key.myapplication.databinding.ActivityLanguageBinding
+import kotlinx.android.synthetic.main.activity_language.*
 
-class MainActivity : AppCompatActivity() {
+class LanguageActivity : AppCompatActivity() {
 
     companion object {
-        val TAG: String = MainActivity::class.java.simpleName
+        val TAG: String = LanguageActivity::class.java.simpleName
     }
 
     // use ViewModel to process callbacks.
-    private val model: MainActivityViewModel by lazy {
-        MainActivityViewModel(
+    private val model: LanguageActivityViewModel by lazy {
+        LanguageActivityViewModel(
             false, {
                 log("click submit button!")
                 requestSubmit()
@@ -33,14 +34,14 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private var binding: ActivityMainBinding? = null
+    private var binding: ActivityLanguageBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // use databinding to decouple
-        binding = (DataBindingUtil.setContentView(this, R.layout.activity_main) as ActivityMainBinding)
+        binding = (DataBindingUtil.setContentView(this, R.layout.activity_language) as ActivityLanguageBinding)
             .apply {
-                model = this@MainActivity.model
+                model = this@LanguageActivity.model
             }
     }
 

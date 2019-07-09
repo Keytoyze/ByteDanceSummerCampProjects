@@ -15,13 +15,13 @@
 
         <variable
                 name="model"
-                type="indi.key.myapplication.MainActivityViewModel"/>
+                type="indi.key.myapplication.day1.LanguageActivityViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            tools:context=".day1.LanguageActivity">
 
         <TextView
                 android:layout_width="wrap_content"

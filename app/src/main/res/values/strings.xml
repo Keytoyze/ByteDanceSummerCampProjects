@@ -17,4 +17,5 @@
     <string name="kotlin">Kotlin</string>
     <string name="php">PHP</string>
     <string name="hint">Please answer the following question:</string>
+    <string name="day_1">Day 1</string>
 </resources>

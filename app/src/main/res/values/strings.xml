@@ -18,4 +18,8 @@
     <string name="php">PHP</string>
     <string name="hint">Please answer the following question:</string>
     <string name="day_1">Day 1</string>
+    <string name="day_2">Day 2</string>
+    <string name="rank_new">新</string>
+    <string name="rank_hot">热</string>
+    <string name="rank_recommend">荐</string>
 </resources>

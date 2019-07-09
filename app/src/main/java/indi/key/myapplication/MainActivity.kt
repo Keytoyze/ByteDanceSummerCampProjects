@@ -6,9 +6,10 @@
 package indi.key.myapplication
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import indi.key.myapplication.day1.LanguageActivity
+import indi.key.myapplication.day2.RankListActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +20,11 @@ class MainActivity : AppCompatActivity() {
 
         day_1_button.setOnClickListener {
             startActivity(Intent(this, LanguageActivity::class.java))
+        }
+
+        day_2_button.setOnClickListener {
+            startActivity(Intent(this, RankListActivity::class.java))
+
         }
     }
 }

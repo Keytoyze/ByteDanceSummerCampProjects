@@ -5,11 +5,11 @@
 
 package indi.key.myapplication.day1
 
-import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import indi.key.myapplication.R
 import indi.key.myapplication.databinding.ActivityLanguageBinding
 import kotlinx.android.synthetic.main.activity_language.*

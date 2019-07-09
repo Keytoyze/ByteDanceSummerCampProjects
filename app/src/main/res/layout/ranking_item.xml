@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Chen Mouxiang <cmx_1007@foxmail.com>
+  ~ All Rights Reserved.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="model"
+                type="indi.key.myapplication.day2.RankItem"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/day2_item">
+
+        <TextView
+                android:id="@+id/rankingOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@{model.getOrderString()}"
+                android:textStyle="italic"
+                android:textColor="@{model.isBold() ? @color/day2_no_bold : @color/day2_no_normal}"
+                android:minWidth="20dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/day2_no"
+                android:layout_marginStart="16dp"
+                android:gravity="end"/>
+
+        <TextView
+                android:id="@+id/rankingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@{model.title}"
+                android:textSize="@dimen/day2_no"
+                android:textColor="@color/day2_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/rankingOrder"
+                android:layout_marginStart="12dp"/>
+
+        <TextView
+                android:background="@drawable/rank_tag_new"
+                android:layout_width="17sp"
+                android:layout_height="17sp"
+                android:textColor="@android:color/white"
+                android:text="@string/rank_new"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:visibility="@{model.isNew() ? View.VISIBLE : View.GONE}"
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:layout_constraintStart_toEndOf="@id/rankingTitle"
+                app:layout_constraintTop_toTopOf="@id/rankingTitle"
+                app:layout_constraintBottom_toBottomOf="@id/rankingTitle"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"/>
+
+        <TextView
+                android:background="@drawable/rank_tag_hot"
+                android:layout_width="17sp"
+                android:layout_height="17sp"
+                android:textColor="@android:color/white"
+                android:text="@string/rank_hot"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:visibility="@{model.isHot() ? View.VISIBLE : View.GONE}"
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:layout_constraintStart_toEndOf="@id/rankingTitle"
+                app:layout_constraintTop_toTopOf="@id/rankingTitle"
+                app:layout_constraintBottom_toBottomOf="@id/rankingTitle"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"/>
+
+        <TextView
+                android:background="@drawable/rank_tag_recommend"
+                android:layout_width="17sp"
+                android:layout_height="17sp"
+                android:textColor="@android:color/white"
+                android:text="@string/rank_recommend"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:visibility="@{model.isRecommended() ? View.VISIBLE : View.GONE}"
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:layout_constraintStart_toEndOf="@id/rankingTitle"
+                app:layout_constraintTop_toTopOf="@id/rankingTitle"
+                app:layout_constraintBottom_toBottomOf="@id/rankingTitle"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/day2_hot_value"
+                android:text="@{model.getHotString()}"
+                app:layout_constraintTop_toTopOf="parent"
+                android:drawableStart="@drawable/ic_whatshot_grey_24dp"
+                android:drawableLeft="@drawable/ic_whatshot_grey_24dp"
+                android:drawablePadding="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="16dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

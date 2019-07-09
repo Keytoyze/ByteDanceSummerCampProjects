@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Chen Mouxiang <cmx_1007@foxmail.com>
+  ~ All Rights Reserved.
+  -->
+
+<resources>
+    <dimen name="day2_item">48dp</dimen>
+    <dimen name="day2_no">15sp</dimen>
+    <dimen name="day2_hot_value">13sp</dimen>
+</resources>

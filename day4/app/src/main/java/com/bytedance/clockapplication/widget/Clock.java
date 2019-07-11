@@ -229,15 +229,15 @@ public class Clock extends View {
 
         Calendar calendar = Calendar.getInstance();
 
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
-        int second = calendar.get(Calendar.SECOND);
+        float second = calendar.get(Calendar.SECOND);
+        float minute = calendar.get(Calendar.MINUTE) + second / 60;
+        float hour = calendar.get(Calendar.HOUR) + minute / 60;
 
-        drawSingleNeedle(canvas, secondsNeedleLength, second / 60f,
+        drawSingleNeedle(canvas, secondsNeedleLength, second / 60,
                 secondsNeedleWidth, secondsNeedleColor);
-        drawSingleNeedle(canvas, minutesNeedleLength, minute / 60f,
+        drawSingleNeedle(canvas, minutesNeedleLength, minute / 60,
                 minutesNeedleWidth, minutesNeedleColor);
-        drawSingleNeedle(canvas, hoursNeedleLength, hour / 24f,
+        drawSingleNeedle(canvas, hoursNeedleLength, hour / 24,
                 minutesNeedleWidth, hoursNeedleColor);
     }
 

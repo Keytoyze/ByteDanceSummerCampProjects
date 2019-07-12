@@ -237,7 +237,7 @@ public class Clock extends View {
                 secondsNeedleWidth, secondsNeedleColor);
         drawSingleNeedle(canvas, minutesNeedleLength, minute / 60,
                 minutesNeedleWidth, minutesNeedleColor);
-        drawSingleNeedle(canvas, hoursNeedleLength, hour / 24,
+        drawSingleNeedle(canvas, hoursNeedleLength, hour / 12,
                 minutesNeedleWidth, hoursNeedleColor);
     }
 

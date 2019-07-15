@@ -14,7 +14,11 @@ import android.widget.Toast;
 
 import com.byted.camp.todolist.R;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -56,6 +60,34 @@ public class DebugActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(DebugActivity.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_CODE_STORAGE_PERMISSION);
+            }
+        });
+
+        final Button fileButton = findViewById(R.id.btn_write_to_file);
+        final TextView fileText = findViewById(R.id.text_write_to_file);
+        fileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File cacheFile = new File(getCacheDir(), "temp.txt");
+                try (FileOutputStream fos = new FileOutputStream(cacheFile)) {
+                    String text = "this is a text";
+                    byte[] content = text.getBytes();
+                    fos.write(content);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                Long filelength = cacheFile.length();
+                byte[] filecontent = new byte[filelength.intValue()];
+                try (FileInputStream in = new FileInputStream(cacheFile)) {
+                    in.read(filecontent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                fileText.setText(new String(filecontent));
+
             }
         });
     }

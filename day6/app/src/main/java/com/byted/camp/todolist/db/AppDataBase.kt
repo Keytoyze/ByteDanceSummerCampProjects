@@ -9,8 +9,6 @@ import com.byted.camp.todolist.model.Note
 import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.migration.Migration
 
-
-
 @TypeConverters(Converters::class)
 @Database(entities = [Note::class], version = 2)
 abstract class AppDataBase : RoomDatabase() {

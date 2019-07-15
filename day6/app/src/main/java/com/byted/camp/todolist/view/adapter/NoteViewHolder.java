@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.byted.camp.todolist.NoteOperator;
+import com.byted.camp.todolist.view.callback.NoteOperator;
 import com.byted.camp.todolist.R;
 import com.byted.camp.todolist.model.Note;
 import com.byted.camp.todolist.model.State;

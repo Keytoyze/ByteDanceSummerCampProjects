@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.byted.camp.todolist.NoteOperator;
+import com.byted.camp.todolist.view.callback.NoteOperator;
 import com.byted.camp.todolist.R;
 import com.byted.camp.todolist.model.Note;
 

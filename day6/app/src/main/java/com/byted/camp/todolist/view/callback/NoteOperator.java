@@ -1,4 +1,4 @@
-package com.byted.camp.todolist;
+package com.byted.camp.todolist.view.callback;
 
 
 import com.byted.camp.todolist.model.Note;

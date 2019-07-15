@@ -1,7 +1,5 @@
 package com.byted.camp.todolist.view.ui
 
-import android.app.Activity
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +8,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.byted.camp.todolist.NoteOperator
+import com.byted.camp.todolist.view.callback.NoteOperator
 import com.byted.camp.todolist.R
 import com.byted.camp.todolist.db.AppDataBase
 import com.byted.camp.todolist.model.Note

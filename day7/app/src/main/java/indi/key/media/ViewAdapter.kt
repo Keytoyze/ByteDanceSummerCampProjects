@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2019 Chen Mouxiang <cmx_1007@foxmail.com>
+ * All Rights Reserved.
+ */
+
+package indi.key.media
+
+import android.view.View
+import android.view.ViewGroup
+
+import androidx.viewpager.widget.PagerAdapter
+
+import java.util.ArrayList
+
+class ViewAdapter : PagerAdapter() {
+    private var datas: List<View> = ArrayList()
+
+    override fun getCount(): Int {
+        return datas.size
+    }
+
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view === `object`
+    }
+
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val view = datas[position]
+        container.addView(view)
+        return view
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(datas[position])
+    }
+
+    fun setData(list: List<View>) {
+        datas = list
+        notifyDataSetChanged()
+    }
+}

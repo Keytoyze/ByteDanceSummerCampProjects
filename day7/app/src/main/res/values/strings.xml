@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright (c) 2019 Chen Mouxiang <cmx_1007@foxmail.com>
+  ~ All Rights Reserved.
+  -->
+
+<resources>
+    <string name="app_name">Media</string>
+    <string name="image">Image</string>
+    <string name="ijkplayer">IJKPlayer</string>
+</resources>

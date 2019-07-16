@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         playerButton.setOnClickListener {
-            //TODO
+            startActivity(Intent(this, VideoActivity::class.java))
         }
     }
 }

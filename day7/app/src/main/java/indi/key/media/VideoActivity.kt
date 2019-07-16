@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
@@ -27,6 +28,17 @@ import kotlinx.android.synthetic.main.include_play_bottom.*
 import tv.danmaku.ijk.media.player.IMediaPlayer
 import tv.danmaku.ijk.media.player.IjkMediaPlayer
 import java.util.concurrent.TimeUnit
+import android.view.KeyEvent.KEYCODE_VOLUME_MUTE
+import android.view.KeyEvent.KEYCODE_VOLUME_UP
+import android.view.KeyEvent.KEYCODE_VOLUME_DOWN
+import android.media.AudioManager
+import android.R.attr.duration
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+
 
 class VideoActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -220,8 +232,7 @@ class VideoActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btn_stop -> if (btn_stop.text.toString() == resources.getString(R.string.stop)) {
                 ijkPlayer!!.stop()
-                /*ijkPlayer.mMediaPlayer.prepareAsync();
-                    ijkPlayer.mMediaPlayer.seekTo(0);*/
+                refresh(0)
                 btn_stop.text = resources.getString(R.string.media_play)
             } else {
                 ijkPlayer!!.setVideoResource(R.raw.big_buck_bunny)
@@ -287,5 +298,44 @@ class VideoActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_setting.text = resources.getString(R.string.smallScreen)
         if (preState) ijkPlayer.start()
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        when (keyCode) {
+            KEYCODE_VOLUME_DOWN -> {
+                val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0)
+                showVolumnSeek(audioManager)
+                return true
+            }
+            KEYCODE_VOLUME_UP -> {
+                val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0)
+                showVolumnSeek(audioManager)
+                return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    private fun showVolumnSeek(audioManager: AudioManager) {
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        val current = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        volumnSeek.run {
+            max = maxVolume
+            progress = current
+            visibility = View.VISIBLE
+            (tag as ValueAnimator?)?.cancel()
+            val valueAnimator = ValueAnimator.ofFloat(1f, 0f).apply {
+                duration = 5000
+                interpolator = null
+                addUpdateListener {
+                    alpha = it.animatedValue as Float
+                }
+            }
+            valueAnimator.start()
+            tag = valueAnimator
+        }
     }
 }

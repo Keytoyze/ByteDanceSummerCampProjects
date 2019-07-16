@@ -36,6 +36,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true" />
 
+        <SeekBar
+            android:id="@+id/volumnSeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="gone"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp" />
+
         <RelativeLayout
             android:id="@+id/rl_loading"
             android:layout_width="match_parent"

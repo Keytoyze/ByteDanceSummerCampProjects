@@ -1,7 +1,6 @@
 package com.bytedance.camera.demo;
 
 import android.Manifest;
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -58,19 +57,25 @@ public class TakePictureActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             //DONE 处理返回数据
             setPic();
-
         }
     }
 
     private void setPic() {
-        imageView.setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
-        //todo 根据imageView裁剪
-        //todo 根据缩放比例读取文件，生成Bitmap
-
-        //todo 如果存在预览方向改变，进行图片旋转
-
-        //todo 如果存在预览方向改变，进行图片旋转
-        //todo 显示图片
+        //DONE 根据imageView裁剪
+        int width = this.imageView.getWidth();
+        int height = this.imageView.getHeight();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        //DONE 根据缩放比例读取文件，生成Bitmap
+        BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = Math.min(options.outWidth / width, options.outHeight / height);
+        options.inPurgeable = true;
+        //DONE 如果存在预览方向改变，进行图片旋转
+        Bitmap bitmap = Utils.rotateImage(BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options),
+                imageFile.getAbsolutePath());
+        //DONE 显示图片
+        this.imageView.setImageBitmap(bitmap);
     }
 
     @Override

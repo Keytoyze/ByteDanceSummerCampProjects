@@ -3,6 +3,7 @@ package com.bytedance.camera.demo.utils;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -195,5 +197,12 @@ public class Utils {
         if (mPermissionList.size() > 0) {//有权限没有通过，需要申请
             ActivityCompat.requestPermissions(activity, permissions, requestCode);
         }
+    }
+
+    public static void insertIntoGallery(File file, Context context) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri fileUri = Uri.fromFile(file);
+        intent.setData(fileUri);
+        context.sendBroadcast(intent);
     }
 }

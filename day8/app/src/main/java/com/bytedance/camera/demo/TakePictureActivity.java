@@ -76,6 +76,8 @@ public class TakePictureActivity extends AppCompatActivity {
                 imageFile.getAbsolutePath());
         //DONE 显示图片
         this.imageView.setImageBitmap(bitmap);
+
+        Utils.insertIntoGallery(imageFile, this);
     }
 
     @Override

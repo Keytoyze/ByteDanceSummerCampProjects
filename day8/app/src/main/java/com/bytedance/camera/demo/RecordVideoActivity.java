@@ -10,7 +10,10 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bytedance.camera.demo.utils.UriUtils;
 import com.bytedance.camera.demo.utils.Utils;
+
+import java.io.File;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
@@ -50,6 +53,8 @@ public class RecordVideoActivity extends AppCompatActivity {
             Uri videoUri = intent.getData();
             videoView.setVideoURI(videoUri);
             videoView.start();
+            Utils.insertIntoGallery(new File(UriUtils.formatUri(this, videoUri)),
+                    this);
         }
     }
 

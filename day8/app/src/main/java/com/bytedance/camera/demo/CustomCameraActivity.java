@@ -1,9 +1,11 @@
 package com.bytedance.camera.demo;
 
+import android.annotation.SuppressLint;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.ExifInterface;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.bytedance.camera.demo.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,11 +41,13 @@ public class CustomCameraActivity extends AppCompatActivity {
     private int CAMERA_TYPE = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     private boolean isRecording = false;
+    private boolean isPause = false;
 
     private int rotationDegree = 0;
 
     private int mWidth = 0, mHeight = 0;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,16 +87,37 @@ public class CustomCameraActivity extends AppCompatActivity {
             mCamera.takePicture(null, null, mPicture);
         });
 
-        findViewById(R.id.btn_record).setOnClickListener(v -> {
+        Button recordBtn = findViewById(R.id.btn_record);
+        Button pauseBtn = findViewById(R.id.btn_record_pause);
+        recordBtn.setOnClickListener(v -> {
             //DONE 录制，第一次点击是start，第二次点击是stop
+            isPause = false;
+            pauseBtn.setText(R.string.pause);
             if (isRecording) {
                 //DONE 停止录制
-                ((TextView) findViewById(R.id.btn_record)).setText("record");
+                recordBtn.setText(R.string.record);
+                pauseBtn.setEnabled(false);
                 releaseMediaRecorder();
+
             } else {
                 //DONE 录制
-                ((TextView) findViewById(R.id.btn_record)).setText("stop");
+                recordBtn.setText(R.string.stop);
+                if (Build.VERSION.SDK_INT >= 24) {
+                    pauseBtn.setEnabled(true);
+                }
                 prepareVideoRecorder();
+            }
+        });
+
+        pauseBtn.setOnClickListener(v -> {
+            if (isPause) {
+                mMediaRecorder.resume();
+                isPause = false;
+                pauseBtn.setText(R.string.pause);
+            } else {
+                mMediaRecorder.pause();
+                isPause = true;
+                pauseBtn.setText(R.string.resume);
             }
         });
 
@@ -246,6 +274,7 @@ public class CustomCameraActivity extends AppCompatActivity {
     }
 
     private MediaRecorder mMediaRecorder;
+    private File videoFile;
 
     private boolean prepareVideoRecorder() {
         //DONE 准备MediaRecorder
@@ -258,7 +287,8 @@ public class CustomCameraActivity extends AppCompatActivity {
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
-        mMediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString());
+        videoFile = getOutputMediaFile(MEDIA_TYPE_VIDEO);
+        mMediaRecorder.setOutputFile(videoFile.getAbsolutePath());
         mMediaRecorder.setPreviewDisplay(mHolder.getSurface());
         mMediaRecorder.setOrientationHint(rotationDegree);
 
@@ -282,6 +312,7 @@ public class CustomCameraActivity extends AppCompatActivity {
         mMediaRecorder.reset();
         mMediaRecorder.release();
         mMediaRecorder = null;
+        Utils.insertIntoGallery(videoFile, this);
         mCamera.lock();
     }
 
@@ -299,6 +330,8 @@ public class CustomCameraActivity extends AppCompatActivity {
             Log.d(TAG, "Error accessing file: " + e.getMessage());
         }
         setPictureDegreeZero(pictureFile.getAbsolutePath());
+
+        Utils.insertIntoGallery(pictureFile, this);
 
         mCamera.startPreview();
     };
